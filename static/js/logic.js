@@ -1,10 +1,4 @@
-//Creating variable to query the url
-var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
-
-d3.json(queryUrl);
-
-
-//Adding variable for the map
+ //Adding variable for the map
 var myMap = L.map("mapid", {
     center: [15.5994, -28.6731],
     zoom: 3
@@ -74,5 +68,26 @@ d3.json(queryUrl, function(data){
       layer.bindPopup("Magnitude: " + feature.properties.mag + "</br>Location " + feature.properties.place);
     }
   }).addTo(myMap);
-})
+
+  //adding legend
+  var legend = L.control({
+    position: "bottomright"
+  });
+
+  legend.onAdd = function() {
+    var div = L.DomUtil.create("div", "info legend");
+    var grades = [0,1,2,3,4,5];
+    var colors = ["#2c99ea", "#7FFF00", "#8A2BE2", "#0000FF","#D2691E", "#FF0000"];
+
+    //loop through the intervals of the colors to put them in the label
+    for (var i = 0; i<grades.length; i++){
+      div.innerHTML +=
+      "<i style'background: " + colors[i] + "'></i>" +
+      grades[i] + (grades[i +1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
+    }
+    return div;
+  };
+
+  legend.addTo(myMap)
+});
 
