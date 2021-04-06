@@ -60,6 +60,7 @@ d3.json(queryUrl, function(data) {
     return mag * 4;
   }
 
+
   L.geoJson(data, {
 
     pointToLayer: function(feature, latlng) {
@@ -83,7 +84,7 @@ d3.json(queryUrl, function(data) {
     var div = L.DomUtil.create("div", "info legend");
 
     var grades = [0, 1, 2, 3, 4, 5];
-    var colors = ["#2c99ea", "#2ceabf", "#92ea2c", "#d5ea2c","#eaa92c", "#ea2c2c"];
+    var colors = ["#2c99ea", "#7FFF00", "#8A2BE2", "#0000FF","#D2691E", "#FF0000"];
 
 
     //loop through the intervals of the colors to put them in the label
